@@ -10,5 +10,3 @@ time.sleep(5)
 #Open the page
 driver.get("https://practicetestautomation.com/practice-test-login/")
 time.sleep(5)
-
-#
