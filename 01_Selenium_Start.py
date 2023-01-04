@@ -9,7 +9,7 @@ driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install())
 
 # Open the page
 driver.get("https://practicetestautomation.com/practice-test-login/")
-time.sleep(5)
+time.sleep(2)
 
 # Type username student into Username field
 username_locator = driver.find_element(By.ID, "username")  # finding the elements by ID
@@ -25,17 +25,20 @@ submit_locator.click()  # calling the click function from submit elements instan
 time.sleep(3)  # adding a waiting time for page is loaded before below scripts is executed
 
 """Verify new page URL contains proper elements"""
-# User is directed to correct page
-expected_URL = driver.current_url  # property to validating the elements
+# User is directed to correct page  (https://practicetestautomation.com/logged-in-successfully/)
+actual_URL = driver.current_url  # property to validating the page
+assert actual_URL == "https://practicetestautomation.com/logged-in-successfully/"  # validating the page
 
 # The Page is displaying Logged In Successfully header
 success_header_loc = driver.find_element(By.TAG_NAME, "h1")  # finding elements by TAG_NAME (class name)
-expected_header = success_header_loc.text  # property to validating the elements
+actual_header = success_header_loc.text  # property to validating the elements
+assert actual_header == "Logged In Successfully"  # Validating the header text
 
 # New page contains expected text ('Congratulations' or 'successfully logged in')
 success_subhead_loc = driver.find_element(By.TAG_NAME, "p")  # finding elements by TAG_NAME
-expected_subhead = success_subhead_loc.text  # property to validating the elements
+actual_subhead = success_subhead_loc.text  # property to validating the elements
+assert actual_subhead == "Congratulations student. You successfully logged in!"  # Validating the message text
 
 # Log out CTA is displayed on the new page
 logout_link = driver.find_element(By.LINK_TEXT, 'Log out')
-
+assert logout_link.is_displayed()
