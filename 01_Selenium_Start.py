@@ -22,11 +22,12 @@ submit_locator = driver.find_element(By.XPATH, "//button[@class='btn']")  # find
 
 """Verify new page URL contains proper elements"""
 # success_header_loc = driver.find_element(By.XPATH, "//h1[@class='post-title']") # finding the elements by Xpath
-success_header_loc = driver.find_element(By.TAG_NAME, "h1")  #finding elements by TAG_NAME
+success_header_loc = driver.find_element(By.TAG_NAME, "h1")  # finding elements by TAG_NAME (class name)
 
 # Verify new page contains expected text ('Congratulations' or 'successfully logged in')
-success_subhead_loc = driver.find_element(By.XPATH, "//strong")
+success_subhead_loc = driver.find_element(By.TAG_NAME, "p")  # finding elements by TAG_NAME
 
 # Verify button Log out is displayed on the new page
-logout_link = driver.find_element(By.XPATH, "//a[@href='https://practicetestautomation.com/practice-test-login/']")
+logout_link = driver.find_element(By.LINK_TEXT, 'Log out')
+    # finding elements by CTA name since the element is not a button but "a" class
 
