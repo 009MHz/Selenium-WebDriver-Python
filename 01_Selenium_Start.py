@@ -27,7 +27,6 @@ success_header_loc = driver.find_element(By.TAG_NAME, "h1")  # finding elements 
 # Verify new page contains expected text ('Congratulations' or 'successfully logged in')
 success_subhead_loc = driver.find_element(By.TAG_NAME, "p")  # finding elements by TAG_NAME
 
-# Verify button Log out is displayed on the new page
+# Verify Log out CTA is displayed on the new page
 logout_link = driver.find_element(By.LINK_TEXT, 'Log out')
-    # finding elements by CTA name since the element is not a button but "a" class
 
