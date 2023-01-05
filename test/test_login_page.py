@@ -1,4 +1,5 @@
 import time
+import pytest
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
@@ -7,6 +8,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 
 
 class TestPositiveLogin:
+
+    @pytest.mark.login
+    @pytest.mark.positive
     def test_positive_login(self):
         driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
@@ -25,7 +29,7 @@ class TestPositiveLogin:
         # Hit Submit button
         submit_locator = driver.find_element(By.XPATH, "//button[@class='btn']")
         submit_locator.click()
-        time.sleep(3)
+        time.sleep(2)
 
         """Verify new page URL contains proper elements"""
         # User is directed to correct page
