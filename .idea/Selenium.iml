@@ -9,6 +9,7 @@
   </component>
   <component name="PackageRequirementsSettings">
     <option name="requirementsPath" value="D:\Docs\Python\PyCharm\Selenium\test\requirements.txt" />
+    <option name="versionSpecifier" value="Strong equality (==x.y.z)" />
   </component>
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="py.test" />
