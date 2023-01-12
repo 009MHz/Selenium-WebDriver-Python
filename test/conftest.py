@@ -19,7 +19,6 @@ def driver(request):
     print(f"\n{browser} Driver is created, exiting the processes...\n")
     test_driver.quit()
 
-
 def pytest_addoption(parser):
     parser.addoption(
         "--browsers",
