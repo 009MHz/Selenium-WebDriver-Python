@@ -10,7 +10,6 @@ class TestPositiveLogin:
     def test_positive_login(self, driver):
         # Open the page
         driver.get("https://practicetestautomation.com/practice-test-login/")
-        time.sleep(2)
         # driver.close() # intentionally issue for debuggin purpose
 
         # Type username student into Username field
@@ -24,7 +23,6 @@ class TestPositiveLogin:
         # Hit Submit button
         submit_locator = driver.find_element(By.XPATH, "//button[@class='btn']")
         submit_locator.click()
-        time.sleep(2)
 
         """Verify new page URL contains proper elements"""
         # User is directed to correct page

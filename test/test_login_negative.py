@@ -15,7 +15,6 @@ class TestNegativeLogin:
     def test_negative_login(self, driver, username, password, error_message):
         # Open the page
         driver.get("https://practicetestautomation.com/practice-test-login/")
-        time.sleep(2)
 
         # Type username into Username field
         username_locator = driver.find_element(By.ID, "username")
@@ -28,7 +27,6 @@ class TestNegativeLogin:
         # Hit Submit button
         submit_locator = driver.find_element(By.XPATH, "//button[@class='btn']")
         submit_locator.click()
-        time.sleep(2)
 
         # Verify error message is displayed
         err_locator = driver.find_element(By.ID, "error")
