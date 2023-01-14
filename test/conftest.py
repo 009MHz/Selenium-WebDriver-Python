@@ -5,10 +5,11 @@ from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 
 
-@pytest.fixture(params=["chrome", "edge"])
+# @pytest.fixture(params=["chrome", "edge"]) # passed multiple browser
+@pytest.fixture() # passed selected browser only
 def driver(request):
-    # browser = request.config.getoption("--browsers")
-    browser = request.param
+    browser = request.config.getoption("--browsers")
+    # browser = request.param
     print(f"Creating virtual {browser} Driver...")
     if browser == "chrome":
         test_driver = webdriver.Chrome(ChromeDriverManager().install())
@@ -17,14 +18,15 @@ def driver(request):
     else:
         raise TypeError(f"'{browser}' isn't installed/provided")
     yield test_driver
+    test_driver.implicitly_wait(2)
     print(f"\n{browser} Driver is created, exiting the processes.\n")
     test_driver.quit()
 
 
-# def pytest_addoption(parser):
-#     parser.addoption(
-#         "--browsers",
-#         action="store",
-#         default="chrome",
-#         help="browsers to run the tests (Chrome/Edge)"
-#     )
+def pytest_addoption(parser):
+    parser.addoption(
+        "--browsers",
+        action="store",
+        default="chrome",
+        help="browsers to run the tests (Chrome/Edge)"
+    )
