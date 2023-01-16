@@ -4,9 +4,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
 
-
 # @pytest.fixture(params=["chrome", "edge"]) # passed multiple browser
-@pytest.fixture() # passed selected browser only
+@pytest.fixture()  # passed selected browser only
 def driver(request):
     browser = request.config.getoption("--browsers")
     # browser = request.param
@@ -17,8 +16,10 @@ def driver(request):
         test_driver = webdriver.Edge(EdgeChromiumDriverManager().install())
     else:
         raise TypeError(f"'{browser}' isn't installed/provided")
+    test_driver.implicitly_wait(15)
     yield test_driver
-    test_driver.implicitly_wait(2)
+
+
     print(f"\n{browser} Driver is created, exiting the processes.\n")
     test_driver.quit()
 
