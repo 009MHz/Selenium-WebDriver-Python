@@ -130,6 +130,7 @@ dmypy.json
 
 # Jetbrain Configuration
 .idea/
+*.iml
 
 # VS Code Configuration
 .vscode/
