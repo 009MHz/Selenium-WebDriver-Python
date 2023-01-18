@@ -1,6 +1,7 @@
 import pytest
-from selenium.common import NoSuchElementException, TimeoutException
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.expected_conditions import visibility_of_element_located, presence_of_element_located
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class TestException:
@@ -20,12 +21,17 @@ class TestException:
         add_locator.click()
 
         """Row 2 Is displayed"""
-
-        # Verify Row 2 availability
-        row2_locator = driver.find_element(By.ID, "row2")
-        assert row2_locator.is_displayed(), "Row 2 Is missing"
+        wait = WebDriverWait(driver, 15)
 
         # Verify the Toastbar is displayed
-        toast_locator = driver.find_element(By.XPATH, "//div[@id='confirmation']")
+        toast_locator = wait.until(visibility_of_element_located((By.XPATH, "//div[@id='confirmation']")))
         actual_toast_msg = toast_locator.text
         assert actual_toast_msg == "Row 2 was added"
+
+        # Verify Row 2 availability
+        row2_locator = wait.until(presence_of_element_located((By.ID, "row2")))
+        assert row2_locator.is_displayed(), "Row 2 Is missing"
+
+
+
+
