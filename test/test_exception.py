@@ -1,6 +1,7 @@
 import pytest
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.expected_conditions import visibility_of_element_located, presence_of_element_located
+from selenium.webdriver.support.expected_conditions import visibility_of_element_located as elem_vis, \
+    presence_of_element_located as elem_loc
 from selenium.webdriver.support.wait import WebDriverWait
 
 
@@ -24,12 +25,12 @@ class TestException:
         wait = WebDriverWait(driver, 15)
 
         # Verify the Toastbar is displayed
-        toast_locator = wait.until(visibility_of_element_located((By.XPATH, "//div[@id='confirmation']")))
+        toast_locator = wait.until(elem_vis((By.XPATH, "//div[@id='confirmation']")))
         actual_toast_msg = toast_locator.text
         assert actual_toast_msg == "Row 2 was added"
 
         # Verify Row 2 availability
-        row2_locator = wait.until(presence_of_element_located((By.ID, "row2")))
+        row2_locator = wait.until(elem_loc((By.ID, "row2")))
         assert row2_locator.is_displayed(), "Row 2 Is missing"
 
 
