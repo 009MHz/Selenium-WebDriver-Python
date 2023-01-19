@@ -1,7 +1,7 @@
 import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.expected_conditions import visibility_of_element_located as elem_vis, \
-    presence_of_element_located as elem_loc, invisibility_of_element as dismiss
+    presence_of_element_located as elem_loc
 from selenium.webdriver.support.wait import WebDriverWait
 
 
@@ -33,7 +33,6 @@ class TestException:
         row2_locator = wait.until(elem_loc((By.ID, "row2")))
         assert row2_locator.is_displayed(), "Row 2 Is missing"
 
-    @pytest.mark.debug
     @pytest.mark.exception
     def test_not_intractable_element(self, driver):
         # Open The Page
@@ -57,3 +56,29 @@ class TestException:
         save_toast_locator = wait.until(elem_vis((By.ID, "confirmation")))
         actual_save_toast = save_toast_locator.text
         assert actual_save_toast == "Row 2 was saved", "Saved Toast Message is incorrect"
+
+    @pytest.mark.exception
+    @pytest.mark.debug
+    def test_invalid_state(self, driver):
+        # Open Page
+        driver.get("https://practicetestautomation.com/practice-test-exceptions/")
+        wait = WebDriverWait(driver, 3)
+
+        "Clear Input Field"
+        # Locate the textbox
+        row1_textbox = driver.find_element(By.XPATH, "//div[@id='row1']/input")
+
+        # Clear the text
+        row1_textbox.clear()
+
+        "Type Text into Input Field"
+        row1_textbox.send_keys("Written Using Python Selenium")
+
+        "Verify Text Changed"
+        # Click save
+        wait.until(elem_loc((By.NAME, "Save"))).click()
+
+        # Verify the toast message
+        toast_saved = wait.until(elem_vis((By.ID, "confirmation")))
+        toast_expected = toast_saved.text
+        assert toast_expected == "Row 1 was saved", "Saved toast message is not following the criteria"
