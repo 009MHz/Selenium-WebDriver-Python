@@ -1,5 +1,3 @@
-import time
-
 import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.expected_conditions import visibility_of_element_located as elem_vis, \
@@ -87,4 +85,3 @@ class TestException:
         # Verify The success/saved toast-bar
         saved_toast = wait.until(elem_vis((By.ID, "confirmation")))
         assert saved_toast.text == "Row 1 was saved", "Unexpected toast bar message is found"
-        time.sleep(7)
