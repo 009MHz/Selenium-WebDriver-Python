@@ -72,7 +72,7 @@ class TestException:
         row1_textbox.clear()
 
         "Type Text into Input Field"
-        row1_textbox.send_keys("Written Using Python Selenium")
+        new_input = row1_textbox.send_keys("Written Using Python Selenium")
 
         "Verify Text Changed"
         # Click save
@@ -82,3 +82,7 @@ class TestException:
         toast_saved = wait.until(elem_vis((By.ID, "confirmation")))
         toast_expected = toast_saved.text
         assert toast_expected == "Row 1 was saved", "Saved toast message is not following the criteria"
+
+        # Verify the passed input
+        actual_new_input = row1_textbox.get_attribute("value")
+        assert actual_new_input == new_input, f"{actual_new_input} is different with {new_input}"
