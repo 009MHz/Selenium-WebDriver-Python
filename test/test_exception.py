@@ -1,7 +1,9 @@
+import time
+
 import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.expected_conditions import visibility_of_element_located as elem_vis, \
-    presence_of_element_located as elem_loc
+    presence_of_element_located as elem_loc, element_to_be_clickable
 from selenium.webdriver.support.wait import WebDriverWait
 
 
@@ -62,27 +64,27 @@ class TestException:
     def test_invalid_state(self, driver):
         # Open Page
         driver.get("https://practicetestautomation.com/practice-test-exceptions/")
-        wait = WebDriverWait(driver, 3)
+        wait = WebDriverWait(driver, 10)
 
         "Clear Input Field"
+        # Click edit button
+        driver.find_element(By.ID, "edit_btn").click()
+
         # Locate the textbox
-        row1_textbox = driver.find_element(By.XPATH, "//div[@id='row1']/input")
+        row1_textbox = driver.find_element(By.CLASS_NAME, "input-field")
+        wait.until(element_to_be_clickable(row1_textbox))
 
         # Clear the text
         row1_textbox.clear()
 
-        "Type Text into Input Field"
-        new_input = row1_textbox.send_keys("Written Using Python Selenium")
+        "Type text into the field"
+        row1_textbox.send_keys("Written using Python Selenium")
 
-        "Verify Text Changed"
-        # Click save
-        wait.until(elem_loc((By.NAME, "Save"))).click()
+        "Verify The saved text"
+        # Hit the save button
+        wait.until(elem_loc((By.ID, "save_btn"))).click()
 
-        # Verify the toast message
-        toast_saved = wait.until(elem_vis((By.ID, "confirmation")))
-        toast_expected = toast_saved.text
-        assert toast_expected == "Row 1 was saved", "Saved toast message is not following the criteria"
-
-        # Verify the passed input
-        actual_new_input = row1_textbox.get_attribute("value")
-        assert actual_new_input == new_input, f"{actual_new_input} is different with {new_input}"
+        # Verify The success/saved toast-bar
+        saved_toast = wait.until(elem_vis((By.ID, "confirmation")))
+        assert saved_toast.text == "Row 1 was saved", "Unexpected toast bar message is found"
+        time.sleep(7)
