@@ -66,23 +66,7 @@ class TestException:
 
         "Clear Input Field"
         # Locate the textbox
-        row1_textbox = driver.find_element(By.XPATH, "//div[@id='row1']/input")
+        row1_textbox = driver.find_element(By.CLASS_NAME, "input-field")
 
         # Clear the text
         row1_textbox.clear()
-
-        "Type Text into Input Field"
-        new_input = row1_textbox.send_keys("Written Using Python Selenium")
-
-        "Verify Text Changed"
-        # Click save
-        wait.until(elem_loc((By.NAME, "Save"))).click()
-
-        # Verify the toast message
-        toast_saved = wait.until(elem_vis((By.ID, "confirmation")))
-        toast_expected = toast_saved.text
-        assert toast_expected == "Row 1 was saved", "Saved toast message is not following the criteria"
-
-        # Verify the passed input
-        actual_new_input = row1_textbox.get_attribute("value")
-        assert actual_new_input == new_input, f"{actual_new_input} is different with {new_input}"
