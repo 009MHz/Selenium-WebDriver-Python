@@ -87,7 +87,6 @@ class TestException:
         assert saved_toast.text == "Row 1 was saved", "Unexpected toast bar message is found"
 
     @pytest.mark.exception
-    @pytest.mark.debug
     def test_stale_element_reference(self, driver):
         # Open page
         driver.get("https://practicetestautomation.com/practice-test-exceptions/")
@@ -103,3 +102,22 @@ class TestException:
         wait = WebDriverWait(driver, 10)
         wait.until(invisibility_of_element_located(instruction_locator))
         assert not instruction_locator.is_displayed(), "Instruction text still exist"
+
+    @pytest.mark.exception
+    @pytest.mark.debug
+    def test_timeout_exception(self, driver):
+        # Open Page
+        driver.get("https://practicetestautomation.com/practice-test-exceptions/")
+
+        # Click Add Button
+        driver.find_element(By.ID, "add_btn").click()
+
+        # Wait for 3 seconds for the next field is displayed
+        wait = WebDriverWait(driver, 3)
+
+        # Verify the Toast Bar appearance for successful adding
+        wait.until(elem_vis((By.ID, "confirmation")))
+
+        # Verify the Second row availability for successful adding
+        wait.until(elem_loc((By.ID, "row2")))
+
