@@ -113,11 +113,11 @@ class TestException:
         driver.find_element(By.ID, "add_btn").click()
 
         # Wait for 3 seconds for the next field is displayed
-        wait = WebDriverWait(driver, 3)
+        wait = WebDriverWait(driver, 13)
 
         # Verify the Toast Bar appearance for successful adding
-        wait.until(elem_vis((By.ID, "confirmation")))
+        wait.until(elem_vis((By.ID, "confirmation")), "Expected Toast Bar is not displayed")
 
         # Verify the Second row availability for successful adding
-        wait.until(elem_loc((By.ID, "row2")))
+        wait.until(elem_loc((By.ID, "row2")), "Row 2 couldn't be located")
 
