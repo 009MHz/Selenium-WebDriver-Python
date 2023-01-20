@@ -1,7 +1,8 @@
+import time
 import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.expected_conditions import visibility_of_element_located as elem_vis, \
-    presence_of_element_located as elem_loc, element_to_be_clickable
+    presence_of_element_located as elem_loc, element_to_be_clickable, invisibility_of_element_located
 from selenium.webdriver.support.wait import WebDriverWait
 
 
@@ -58,7 +59,6 @@ class TestException:
         assert actual_save_toast == "Row 2 was saved", "Saved Toast Message is incorrect"
 
     @pytest.mark.exception
-    @pytest.mark.debug
     def test_invalid_state(self, driver):
         # Open Page
         driver.get("https://practicetestautomation.com/practice-test-exceptions/")
@@ -85,3 +85,19 @@ class TestException:
         # Verify The success/saved toast-bar
         saved_toast = wait.until(elem_vis((By.ID, "confirmation")))
         assert saved_toast.text == "Row 1 was saved", "Unexpected toast bar message is found"
+
+    @pytest.mark.exception
+    @pytest.mark.debug
+    def test_stale_element_reference(self, driver):
+        # Open page
+        driver.get("https://practicetestautomation.com/practice-test-exceptions/")
+
+        "Find the instructions text element"
+        instruction_locator = driver.find_element(By.ID, "instructions")
+        assert instruction_locator.is_displayed(), "Instructor is missing"
+
+        "Hit Add Button"
+        driver.find_element(By.ID, "add_btn").click()
+
+        "Instruction text should be disappear"
+        assert not instruction_locator.is_displayed(), "Instruction text still exist"
