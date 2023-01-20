@@ -100,4 +100,6 @@ class TestException:
         driver.find_element(By.ID, "add_btn").click()
 
         "Instruction text should be disappear"
+        wait = WebDriverWait(driver, 10)
+        wait.until(invisibility_of_element_located(instruction_locator))
         assert not instruction_locator.is_displayed(), "Instruction text still exist"
