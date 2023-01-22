@@ -29,6 +29,10 @@ class BasePage:
         """Obtaining the current URL Value"""
         return self._driver.current_url
 
+    def _get_text(self, locator: tuple, time: int = 10) -> str:
+        self._waiting_visibility(locator, time)
+        return self._find(locator).text
+
     def display_checker(self, locator: tuple) -> bool:
         try:
             return self._find(locator).is_displayed()
