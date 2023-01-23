@@ -1,4 +1,3 @@
-import time
 import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.expected_conditions import visibility_of_element_located as elem_vis, \
@@ -104,7 +103,6 @@ class TestException:
         assert not instruction_locator.is_displayed(), "Instruction text still exist"
 
     @pytest.mark.exception
-    @pytest.mark.debug
     def test_timeout_exception(self, driver):
         # Open Page
         driver.get("https://practicetestautomation.com/practice-test-exceptions/")
@@ -120,4 +118,3 @@ class TestException:
 
         # Verify the Second row availability for successful adding
         wait.until(elem_loc((By.ID, "row2")), "Row 2 couldn't be located")
-
