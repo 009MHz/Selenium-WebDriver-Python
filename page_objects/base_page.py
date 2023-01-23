@@ -10,7 +10,7 @@ class BasePage:
         self._driver = driver
 
     def _find(self, locator: tuple) -> WebElement:
-        self._driver.find_element(*locator)
+        return self._driver.find_element(*locator)
 
     def _type(self, locator: tuple, text: str, time: int = 10):
         self._waiting_visibility(locator, time)
@@ -24,20 +24,22 @@ class BasePage:
         self._waiting_visibility(locator, time)
         self._find(locator).click()
 
-    @property
-    def get_url(self) -> str:
-        """Obtaining the current URL Value"""
-        return self._driver.current_url
-
-    def _get_text(self, locator: tuple, time: int = 10) -> str:
-        self._waiting_visibility(locator, time)
-        return self._find(locator).text
-
-    def display_checker(self, locator: tuple) -> bool:
+    def _display_checker(self, locator: tuple) -> bool:
         try:
             return self._find(locator).is_displayed()
         except NoSuchElementException:
             return False
 
-    def open_url(self, url: str):
+    def _open_url(self, url: str):
         self._driver.get(url)
+
+    @property
+    def get_url(self) -> str:
+        """Obtaining the current URL Value"""
+        return self._driver.current_url
+
+
+    def _get_text(self, locator: tuple, time: int = 10) -> str:
+        """Obtaining the text value from the located element"""
+        self._waiting_visibility(locator, time)
+        return self._find(locator).text
