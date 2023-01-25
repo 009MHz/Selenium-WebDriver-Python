@@ -39,6 +39,9 @@ class ExcPage(BasePage):
     def r1_input_presence(self):
         return super()._waiting_clickable(self.__input1)
 
+    def r1_type_text(self, text: str):
+        super()._type(self.__input1, text)
+
     def r1_input_clear(self):
         super()._find(self.__input1).clear()
 
@@ -49,6 +52,9 @@ class ExcPage(BasePage):
         """Waiting for row 2 assets to be displayed"""
         super()._waiting_visibility(self.__row2, time=15)
         return super()._display_checker(self.__row2)
+
+    def r2_type_text(self, text: str):
+        super()._type(self.__input2, text)
 
     def r2_hit_save(self):
         super()._click(self.__row2save)
@@ -70,5 +76,3 @@ class ExcPage(BasePage):
 
     def inst_absence(self):
         return super()._waiting_invisibility(self.__instructions)
-
-
