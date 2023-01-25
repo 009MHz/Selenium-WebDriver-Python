@@ -38,10 +38,19 @@ class TestException:
         assert exc.toast_text() == "Row 1 was saved", "Unexpected toast bar message is found"
 
     @pytest.mark.exception
-    @pytest.mark.debug
     def test_stale_element_reference(self, driver):
         exc = ExceptionPage(driver)
         exc.open_page()
         exc.inst_presence()
         exc.r1_hit_add()
         assert not exc.inst_absence(), "Instruction text still exist"
+
+    @pytest.mark.exception
+    @pytest.mark.debug
+    def test_timeout_exception(self, driver):
+        pass
+        # Open Page
+        # Click Add Button
+        # Wait for 3 seconds for the next field is displayed
+        # Verify the Toast Bar appearance for successful adding
+        # Verify the Second row availability for successful adding
