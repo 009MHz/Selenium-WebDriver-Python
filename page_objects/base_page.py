@@ -24,8 +24,8 @@ class BasePage:
         wait = WebDriverWait(self._driver, time)
         wait.until(ec.element_to_be_clickable(locator))
     
-    def _click(self, locator: tuple, time: int = 10):
-        self._waiting_clickable(locator, time)
+    def _click(self, locator: tuple):
+        self._waiting_clickable(locator)
         self._find(locator).click()
 
     def _display_checker(self, locator: tuple) -> bool:
