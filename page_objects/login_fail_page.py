@@ -17,9 +17,10 @@ class LoginFailPage(BasePage):
 
     @property
     def get_error_message(self) -> str:
-        """Obtaining the actual header text on the loaded page"""
+        """Obtaining the actual error message after passing invalid input"""
         return super()._get_text(self.__fail_toast)
 
     def toast_display(self) -> bool:
         """Validating the error toast availability"""
+        super()._waiting_visibility(self.__fail_toast)
         return super()._display_checker(self.__fail_toast)
