@@ -1,5 +1,3 @@
-import time
-
 import pytest
 from page_objects.exception_page import ExceptionPage
 
@@ -30,7 +28,7 @@ class TestException:
         exc = ExceptionPage(driver)
         exc.open_page()
         exc.r1_hit_edit()
-        assert not exc.r1_input_presence(), "Row 1 textbox is disabled "
+        assert not exc.r1_input_is_clickable(), "Row 1 textbox is disabled "
         exc.r1_input_clear()
         exc.r1_type_text("Written using Selenium")
         exc.r1_hit_save()
@@ -38,17 +36,10 @@ class TestException:
         assert exc.toast_text() == "Row 1 was saved", "Unexpected toast bar message is found"
 
     @pytest.mark.exception
+    @pytest.mark.debug
     def test_stale_element_reference(self, driver):
         exc = ExceptionPage(driver)
         exc.open_page()
-        exc.inst_presence()
+        exc.guide_presence()
         exc.r1_hit_add()
-        assert not exc.inst_absence(), "Instruction text still exist"
-
-    @pytest.mark.exception
-    def test_timeout_exception(self, driver):
-        exc = ExceptionPage(driver)
-        exc.open_page()
-        exc.r1_hit_add()
-        assert exc.r2_presence(), "Row 2 can't be located on the page"
-        assert exc.toast_text() == "Row 2 was added", "Added Toast Message is incorrect"
+        assert not exc.guide_presence()

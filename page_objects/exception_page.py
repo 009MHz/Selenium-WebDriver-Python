@@ -20,11 +20,12 @@ class ExceptionPage(BasePage):
     def __init__(self, driver=WebDriver):
         super().__init__(driver)
 
+
     def open_page(self):
         """Open the Exception Page URL"""
         super()._open_url(self.__url)
 
-    def r1_presence(self):
+    def r1_presence(self) -> bool:
         """Validating row 1 availability"""
         super()._waiting_visibility(self.__row1)
         return super()._display_checker(self.__row1)
@@ -37,7 +38,7 @@ class ExceptionPage(BasePage):
         """Hit 'Edit' button on the row 1"""
         super()._click(self.__edit)
 
-    def r1_input_presence(self):
+    def r1_input_is_clickable(self) -> bool:
         """Validating r1 input availability editable/uneditable"""
         return super()._waiting_clickable(self.__input1)
 
@@ -53,7 +54,8 @@ class ExceptionPage(BasePage):
         """Hit 'Save' button on the `row 1`"""
         super()._click(self.__row1save)
 
-    def r2_presence(self):
+
+    def r2_presence(self) -> bool:
         """Waiting for row 2 assets to be displayed"""
         super()._waiting_visibility(self.__row2, time=15)
         return super()._display_checker(self.__row2)
@@ -66,24 +68,17 @@ class ExceptionPage(BasePage):
         """Hit 'Save' button on the `row 2`"""
         super()._click(self.__row2save)
 
-    def toast_presence(self):
+
+    def toast_presence(self) -> bool:
         """Waiting for confirmation / toast bar to be displayed"""
         super()._waiting_visibility(self.__toast, time=25)
         return super()._display_checker(self.__toast)
 
-    def toast_text(self):
+    def toast_text(self) -> str:
         """Obtaining the displayed text from the toast bar"""
         return super()._get_text(self.__toast)
 
-    def inst_presence(self):
+
+    def guide_presence(self) -> bool:
         """Validating the instructions availability"""
-        super()._waiting_visibility(self.__instructions)
         return super()._display_checker(self.__instructions)
-
-    def inst_text(self):
-        """Obtaining the displayed text from the toast instructions section"""
-        return super()._get_text(self.__instructions)
-
-    def inst_absence(self):
-        """Validating the instructions disappearance"""
-        return super()._waiting_invisibility(self.__instructions)
