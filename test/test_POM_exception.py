@@ -26,7 +26,6 @@ class TestException:
         assert exc.toast_text() == "Row 2 was saved", "Saved Toast Message is incorrect"
 
     @pytest.mark.exception
-    @pytest.mark.debug
     def test_invalid_state(self, driver):
         exception = ExcPage(driver)
         exception.open_page()
@@ -37,3 +36,12 @@ class TestException:
         exception.r1_hit_save()
         assert exception.toast_presence(), "Saved toast bar is missing"
         assert exception.toast_text() == "Row 1 was saved", "Unexpected toast bar message is found"
+
+    @pytest.mark.exception
+    @pytest.mark.debug
+    def test_stale_element_reference(self, driver):
+        pass
+        # Open page
+        "Find the instructions text element"
+        "Hit Add Button"
+        "Instruction text should be disappear"
