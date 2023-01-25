@@ -38,7 +38,7 @@ class ExcPage(BasePage):
         super()._click(self.__edit)
 
     def r1_input_presence(self):
-        """Validating r1 input availability"""
+        """Validating r1 input availability editable/uneditable"""
         return super()._waiting_clickable(self.__input1)
 
     def r1_type_text(self, text: str):
