@@ -11,8 +11,8 @@ class TestException:
         exc.open_page()
         assert exc.r1_presence(), "Row 1 Can't be found on the page"
         exc.r1_hit_add()
-        exc.toast_presence()
         assert exc.r2_presence(), "Row 2 can't be located on the page"
+        assert exc.toast_presence(), "New Row toast message can't be found on the page"
         assert exc.toast_text() == "Row 2 was added", "Added Toast Message is incorrect"
 
     @pytest.mark.exception
@@ -46,11 +46,9 @@ class TestException:
         assert not exc.inst_absence(), "Instruction text still exist"
 
     @pytest.mark.exception
-    @pytest.mark.debug
     def test_timeout_exception(self, driver):
-        pass
-        # Open Page
-        # Click Add Button
-        # Wait for 3 seconds for the next field is displayed
-        # Verify the Toast Bar appearance for successful adding
-        # Verify the Second row availability for successful adding
+        exc = ExceptionPage(driver)
+        exc.open_page()
+        exc.r1_hit_add()
+        assert exc.r2_presence(), "Row 2 can't be located on the page"
+        assert exc.toast_text() == "Row 2 was added", "Added Toast Message is incorrect"
