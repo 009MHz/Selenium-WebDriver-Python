@@ -30,22 +30,27 @@ class ExcPage(BasePage):
         return super()._display_checker(self.__row1)
 
     def r1_hit_add(self):
-        """Hit add on the row 1"""
+        """Hit 'Add' button on the row 1"""
         super()._click(self.__add)
 
     def r1_hit_edit(self):
+        """Hit 'Edit' button on the row 1"""
         super()._click(self.__edit)
 
     def r1_input_presence(self):
+        """Validating r1 input availability"""
         return super()._waiting_clickable(self.__input1)
 
     def r1_type_text(self, text: str):
+        """Inserting text on the Row 1 textbox"""
         super()._type(self.__input1, text)
 
     def r1_input_clear(self):
+        """Clearing all values on the Row 1 textbox"""
         super()._find(self.__input1).clear()
 
     def r1_hit_save(self):
+        """Hit 'Save' button on the `row 1`"""
         super()._click(self.__row1save)
 
     def r2_presence(self):
@@ -54,9 +59,11 @@ class ExcPage(BasePage):
         return super()._display_checker(self.__row2)
 
     def r2_type_text(self, text: str):
+        """Inserting text on the Row 2 textbox"""
         super()._type(self.__input2, text)
 
     def r2_hit_save(self):
+        """Hit 'Save' button on the `row 2`"""
         super()._click(self.__row2save)
 
     def toast_presence(self):
@@ -65,14 +72,18 @@ class ExcPage(BasePage):
         return super()._display_checker(self.__toast)
 
     def toast_text(self):
+        """Obtaining the displayed text from the toast bar"""
         return super()._get_text(self.__toast)
 
     def inst_presence(self):
+        """Validating the instructions availability"""
         super()._waiting_visibility(self.__instructions)
         return super()._display_checker(self.__instructions)
 
     def inst_text(self):
+        """Obtaining the displayed text from the toast instructions section"""
         return super()._get_text(self.__instructions)
 
     def inst_absence(self):
+        """Validating the instructions disappearance"""
         return super()._waiting_invisibility(self.__instructions)
