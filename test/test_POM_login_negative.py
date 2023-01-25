@@ -12,7 +12,6 @@ class TestNegativeLogin:
             ("invalid_name", "Password123", "Your username is invalid!"),
             ("student", "invalid_pass", "Your password is invalid!")
         ])
-    @pytest.mark.debug
     def test_negative_login(self, driver, username, password, error_message):
         login_control = LoginPage(driver)
         negative_validator = LoginFailPage(driver)
