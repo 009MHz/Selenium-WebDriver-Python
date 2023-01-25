@@ -4,7 +4,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 
 
 
-class ExcPage(BasePage):
+class ExceptionPage(BasePage):
     __url = "https://practicetestautomation.com/practice-test-exceptions/"
     __row1 = (By.ID, "row1")
     __input1 = (By.XPATH, "//div[@id='row1']/input")
