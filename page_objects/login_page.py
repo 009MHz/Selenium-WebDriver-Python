@@ -1,10 +1,10 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as ec
+
+from page_objects.base_page import BasePage
 
 
-class LoginPage:
+class LoginPage(BasePage):
     # Assign  the locator into protected variable
     __url = "https://practicetestautomation.com/practice-test-login/"
     __username_field = (By.ID, "username")
@@ -13,24 +13,19 @@ class LoginPage:
 
 
     def __init__(self, driver: WebDriver):
-        self._driver = driver
+        super().__init__(driver)
 
     def open_page(self):
         """Open The Passed Page"""
-        self._driver.get(self.__url)
+        super()._open_url(self.__url)
 
     def execute_login(self, username: str, password: str):
         """Executing Login Processes, by finding the elements then passing the correct value for respective field"""
-        wait = WebDriverWait(self._driver, 10)
-
         # Type username student into Username field
-        wait.until(ec.visibility_of_element_located(self.__username_field))
-        self._driver.find_element(self.__username_field).send_keys(username)
+        super()._type(self.__username_field, username)
 
         # Type password Password123 into Password field
-        wait.until(ec.visibility_of_element_located(self.__password_field))
-        self._driver.find_element(self.__password_field).send_keys(password)
+        super()._type(self.__password_field, password)
 
         # Hit Submit button
-        wait.until(ec.visibility_of_element_located(self.__submit_button))
-        self._driver.find_element(self.__submit_button).click()
+        super()._click(self.__submit_button)

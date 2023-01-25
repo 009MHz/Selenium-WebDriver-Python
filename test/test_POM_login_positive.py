@@ -6,7 +6,6 @@ from page_objects.login_success import LoginSuccessPage
 class TestPositiveLogin:
     @pytest.mark.login
     @pytest.mark.positive
-    @pytest.mark.debug
     def test_positive_login(self, driver):
         login_control = LoginPage(driver)
         login_verificator = LoginSuccessPage(driver)
