@@ -28,13 +28,12 @@ class TestException:
     @pytest.mark.exception
     @pytest.mark.debug
     def test_invalid_state(self, driver):
-        pass
-        # Open Page
-        "Clear Input Field"
-        # Click edit button
-        # Locate the textbox
-        # Clear the text
-        "Type text into the field"
-        "Verify The saved text"
-        # Hit the save button
-        # Verify The success/saved toast-bar
+        exception = ExcPage(driver)
+        exception.open_page()
+        exception.r1_hit_edit()
+        assert not exception.r1_input_presence(), "Row 1 textbox is disabled "
+        exception.r1_input_clear()
+        exception.r1_type_text("Written using Selenium")
+        exception.r1_hit_save()
+        assert exception.toast_presence(), "Saved toast bar is missing"
+        assert exception.toast_text() == "Row 1 was saved", "Unexpected toast bar message is found"
