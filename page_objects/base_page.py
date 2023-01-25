@@ -20,6 +20,10 @@ class BasePage:
         wait = WebDriverWait(self._driver, time)
         wait.until(ec.visibility_of_element_located(locator))
 
+    def _waiting_clickable(self, locator: tuple, time: int - 15):
+        wait = WebDriverWait(self._driver, time)
+        wait.until(ec.element_to_be_clickable(locator))
+    
     def _click(self, locator: tuple, time: int = 10):
         self._waiting_visibility(locator, time)
         self._find(locator).click()
