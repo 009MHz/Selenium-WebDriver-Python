@@ -24,7 +24,7 @@ class ExcPage(BasePage):
         """Open the Exception Page URL"""
         super()._open_url(self.__url)
 
-    def r1_presence(self) -> bool:
+    def r1_presence(self):
         """Validating row 1 availability"""
         super()._waiting_visibility(self.__row1)
         return super()._display_checker(self.__row1)
@@ -36,7 +36,7 @@ class ExcPage(BasePage):
     def r1_hit_edit(self):
         super()._click(self.__edit)
 
-    def r1_input_presence(self) -> bool:
+    def r1_input_presence(self):
         return super()._waiting_clickable(self.__input1)
 
     def r1_input_clear(self):
@@ -45,7 +45,7 @@ class ExcPage(BasePage):
     def r1_hit_save(self):
         super()._click(self.__row1save)
 
-    def r2_presence(self) -> bool:
+    def r2_presence(self):
         """Waiting for row 2 assets to be displayed"""
         super()._waiting_visibility(self.__row2, time=15)
         return super()._display_checker(self.__row2)
@@ -58,17 +58,17 @@ class ExcPage(BasePage):
         super()._waiting_visibility(self.__toast, time=25)
         return super()._display_checker(self.__toast)
 
-    def toast_text(self) -> str:
+    def toast_text(self):
         return super()._get_text(self.__toast)
 
-    def inst_presence(self) -> bool:
+    def inst_presence(self):
         super()._waiting_visibility(self.__instructions)
         return super()._display_checker(self.__instructions)
 
-    def inst_text(self) -> str:
+    def inst_text(self):
         return super()._get_text(self.__instructions)
 
-    def inst_absence(self) -> bool:
+    def inst_absence(self):
         return super()._waiting_invisibility(self.__instructions)
 
 
