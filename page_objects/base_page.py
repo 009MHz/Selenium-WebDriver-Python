@@ -20,14 +20,14 @@ class BasePage:
         wait = WebDriverWait(self._driver, time)
         wait.until(ec.visibility_of_element_located(locator))
 
-    def _waiting_clickable(self, locator: tuple, time: int = 15):
+    def _waiting_clickable(self, locator: tuple, time: int = 10):
         wait = WebDriverWait(self._driver, time)
         wait.until(ec.element_to_be_clickable(locator))
-        
-    def _waiting_invisibility(self, locator: tuple, time: int= 5):
+
+    def _waiting_invisibility(self, locator: tuple, time: int = 5):
         wait = WebDriverWait(self._driver, time)
         wait.until(ec.invisibility_of_element_located(locator))
-    
+
     def _click(self, locator: tuple):
         self._waiting_clickable(locator)
         self._find(locator).click()
@@ -45,7 +45,6 @@ class BasePage:
     def get_url(self) -> str:
         """Obtaining the current URL Value"""
         return self._driver.current_url
-
 
     def _get_text(self, locator: tuple, time: int = 10) -> str:
         """Obtaining the text value from the located element"""
