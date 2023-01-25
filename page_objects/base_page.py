@@ -23,6 +23,10 @@ class BasePage:
     def _waiting_clickable(self, locator: tuple, time: int = 15):
         wait = WebDriverWait(self._driver, time)
         wait.until(ec.element_to_be_clickable(locator))
+        
+    def _waiting_invisibility(self, locator: tuple, time: int= 15):
+        wait = WebDriverWait(self._driver, time)
+        wait.until(ec.invisibility_of_element_located(locator))
     
     def _click(self, locator: tuple):
         self._waiting_clickable(locator)
