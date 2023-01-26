@@ -43,7 +43,7 @@ class TestException:
 
         "Type text into the second input field"
         # Pass the text to the text box
-        row2_input_locator = driver.find_element(By.XPATH, "//div[@id='row2']/input")
+        row2_input_locator = driver.find_element(By.XPATH, "//div[@id='row2']/input")  # expected error no waiting time
         row2_input_locator.send_keys("Written using python selenium")
 
         "Push Save button using locator By.name('Save')"
@@ -86,6 +86,7 @@ class TestException:
         assert saved_toast.text == "Row 1 was saved", "Unexpected toast bar message is found"
 
     @pytest.mark.exception
+    @pytest.mark.debug
     def test_stale_element_reference(self, driver):
         # Open page
         driver.get("https://practicetestautomation.com/practice-test-exceptions/")
@@ -98,9 +99,8 @@ class TestException:
         driver.find_element(By.ID, "add_btn").click()
 
         "Instruction text should be disappear"
-        wait = WebDriverWait(driver, 10)
-        wait.until(invisibility_of_element_located(instruction_locator))
-        assert not instruction_locator.is_displayed(), "Instruction text still exist"
+        wait = WebDriverWait(driver, 15)
+        assert wait.until(invisibility_of_element_located(instruction_locator), "Instruction text still exist")
 
     @pytest.mark.exception
     def test_timeout_exception(self, driver):
