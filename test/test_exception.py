@@ -43,7 +43,9 @@ class TestException:
 
         "Type text into the second input field"
         # Pass the text to the text box
-        row2_input_locator = driver.find_element(By.XPATH, "//div[@id='row2']/input")  # expected error no waiting time
+        row2_input_locator = driver.find_element(By.XPATH, "//div[@id='row2']/input")  # expected error (no waiting time)
+        wait = WebDriverWait(driver, 15)
+        # row2_input_locator = wait.until(element_to_be_clickable((By.XPATH, "//div[@id='row2']/input")))  # fix the issue
         row2_input_locator.send_keys("Written using python selenium")
 
         "Push Save button using locator By.name('Save')"
@@ -52,7 +54,6 @@ class TestException:
         save_btn_locator.click()
 
         "Verify text saved"
-        wait = WebDriverWait(driver, 30)
         save_toast_locator = wait.until(elem_vis((By.ID, "confirmation")))
         actual_save_toast = save_toast_locator.text
         assert actual_save_toast == "Row 2 was saved", "Saved Toast Message is incorrect"
@@ -86,7 +87,6 @@ class TestException:
         assert saved_toast.text == "Row 1 was saved", "Unexpected toast bar message is found"
 
     @pytest.mark.exception
-    @pytest.mark.debug
     def test_stale_element_reference(self, driver):
         # Open page
         driver.get("https://practicetestautomation.com/practice-test-exceptions/")
