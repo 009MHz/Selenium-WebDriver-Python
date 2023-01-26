@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.expected_conditions import visibility_of_element_located as elem_vis, \
@@ -35,6 +37,7 @@ class TestException:
 
     @pytest.mark.exception
     def test_not_intractable_element(self, driver):
+        wait = WebDriverWait(driver, 15)
         # Open The Page
         driver.get("https://practicetestautomation.com/practice-test-exceptions/")
 
@@ -44,8 +47,6 @@ class TestException:
         "Type text into the second input field"
         # Pass the text to the text box
         row2_input_locator = driver.find_element(By.XPATH, "//div[@id='row2']/input")  # expected error (no waiting time)
-        wait = WebDriverWait(driver, 15)
-        # row2_input_locator = wait.until(element_to_be_clickable((By.XPATH, "//div[@id='row2']/input")))  # fix the issue
         row2_input_locator.send_keys("Written using python selenium")
 
         "Push Save button using locator By.name('Save')"

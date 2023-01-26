@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from selenium.webdriver.common.by import By
 
@@ -29,6 +31,7 @@ class TestNegativeLogin:
 
         # Verify error message is displayed
         err_locator = driver.find_element(By.ID, "error")
+        time.sleep(1)  # waiting time for assertion issue
         assert err_locator.is_displayed(), "Error Message is missing"
 
         # Verify error message text is correct
