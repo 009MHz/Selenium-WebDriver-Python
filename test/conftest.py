@@ -16,7 +16,7 @@ def driver(request):
         test_driver = webdriver.Edge(EdgeChromiumDriverManager().install())
     else:
         raise TypeError(f"'{browser}' isn't installed/provided")
-    test_driver.implicitly_wait(15)
+    # test_driver.implicitly_wait(15)
     yield test_driver
 
 
