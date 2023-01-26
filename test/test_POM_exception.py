@@ -36,7 +36,6 @@ class TestException:
         assert exc.toast_text() == "Row 1 was saved", "Unexpected toast bar message is found"
 
     @pytest.mark.exception
-    @pytest.mark.debug
     def test_stale_element_reference(self, driver):
         exc = ExceptionPage(driver)
         exc.open_page()
