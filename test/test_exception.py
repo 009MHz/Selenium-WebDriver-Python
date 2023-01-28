@@ -1,3 +1,5 @@
+import time
+
 import pytest
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.expected_conditions import visibility_of_element_located as elem_vis, \
@@ -35,6 +37,7 @@ class TestException:
 
     @pytest.mark.exception
     def test_not_intractable_element(self, driver):
+        wait = WebDriverWait(driver, 15)
         # Open The Page
         driver.get("https://practicetestautomation.com/practice-test-exceptions/")
 
@@ -43,7 +46,7 @@ class TestException:
 
         "Type text into the second input field"
         # Pass the text to the text box
-        row2_input_locator = driver.find_element(By.XPATH, "//div[@id='row2']/input")
+        row2_input_locator = driver.find_element(By.XPATH, "//div[@id='row2']/input")  # expected error (no waiting time)
         row2_input_locator.send_keys("Written using python selenium")
 
         "Push Save button using locator By.name('Save')"
@@ -52,7 +55,6 @@ class TestException:
         save_btn_locator.click()
 
         "Verify text saved"
-        wait = WebDriverWait(driver, 30)
         save_toast_locator = wait.until(elem_vis((By.ID, "confirmation")))
         actual_save_toast = save_toast_locator.text
         assert actual_save_toast == "Row 2 was saved", "Saved Toast Message is incorrect"
@@ -98,9 +100,8 @@ class TestException:
         driver.find_element(By.ID, "add_btn").click()
 
         "Instruction text should be disappear"
-        wait = WebDriverWait(driver, 10)
-        wait.until(invisibility_of_element_located(instruction_locator))
-        assert not instruction_locator.is_displayed(), "Instruction text still exist"
+        wait = WebDriverWait(driver, 15)
+        assert wait.until(invisibility_of_element_located(instruction_locator), "Instruction text still exist")
 
     @pytest.mark.exception
     def test_timeout_exception(self, driver):
