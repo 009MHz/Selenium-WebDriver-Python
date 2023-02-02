@@ -5,6 +5,8 @@
       <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
+      <excludeFolder url="file://$MODULE_DIR$/test/reports" />
+      <excludeFolder url="file://$MODULE_DIR$/.pytest_cache" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.9 (selenium_webdriver_python)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
