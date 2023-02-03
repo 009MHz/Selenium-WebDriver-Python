@@ -137,3 +137,4 @@ dmypy.json
 /test/reports/
 /reports/report.html
 /reports/assets/style.css
+.vscode/settings.json

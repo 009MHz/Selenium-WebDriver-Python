@@ -6,5 +6,4 @@
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
     "python.testing.autoTestDiscoverOnSaveEnabled": true,
-    "python.defaultInterpreterPath": "D:\\Docs\\Python\\_venv\\Selenium_env\\Scripts\\python",
 }
