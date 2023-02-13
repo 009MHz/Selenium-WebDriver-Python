@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 # Jetbrain Configuration
-.idea/
+*.idea/
 *.iml
 
 # VS Code Configuration
