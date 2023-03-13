@@ -1,6 +1,6 @@
+import pytest
 import time
 import selenium.webdriver.support.expected_conditions as ec
-
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 
@@ -59,8 +59,9 @@ class TestMultipleAddress:
         assert success_icon.is_displayed(), "Document not uploaded"
         time.sleep(10)
 
+    @pytest.mark.debug
     def test_add_recipients(self, driver):
-        wait = WebDriverWait(driver, 15)
+        wait = WebDriverWait(driver, 10)
         driver.get("https://app.privy.id/upload/share-only/share?docToken=cdc3c8b07fecf76bb87dbc32cac1d6b52f4e8567dae4a6fd9a471d25ff0ae004")
 
         "login with the correct user"
@@ -77,11 +78,20 @@ class TestMultipleAddress:
         cont_button.click()
 
         "Setup the method"
-        wait.until(ec.element_to_be_clickable((By.XPATH, "//input[@id='__BVID__177']"))).click()  # serial method
-        wait.until(ec.visibility_of_element_located((By.ID, "v-recipient-1"))).click()  # add recipient button
+        # wait for the overlay element to disappear
+        wait.until(ec.invisibility_of_element_located((By.CLASS_NAME, "overlay overlay-dark")))
+
+        # scroll the radio button element into view
+        wait.until(ec.visibility_of_element_located(
+            (By.XPATH, "//div[@class='custom-control custom-control-inline custom-radio'][2]")))
+        wait.until(ec.element_to_be_clickable((By.XPATH, "//div[@class='custom-control custom-control-inline custom-radio'][2]"))).click()
+
+
+        wait.until(ec.visibility_of_element_located((By.ID, "v-recipient-1")))  # add recipient button
+        wait.until(ec.element_to_be_clickable((By.ID, "v-recipient-1"))).click()
 
         # Type the recipient
-        textbox = wait.until(ec.element_to_be_clickable(By. CLASS_NAME, "multiselect__input"))
+        textbox = wait.until(ec.element_to_be_clickable(By. XPATH, "//input[@class='multiselect__input']"))
         textbox.send_keys("mse.01@mailinator.com")
         time.sleep(10)
 
