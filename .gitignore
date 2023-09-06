@@ -133,7 +133,7 @@ dmypy.json
 *.iml
 
 # VS Code Configuration
-*.vscode
+.vscode
 /test/reports/
 /reports/report.html
 /reports/assets/style.css
